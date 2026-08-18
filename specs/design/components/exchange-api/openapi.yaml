@@ -7,11 +7,22 @@ servers:
   - url: /
 paths:
   /currencies:
-    parameters:
-      - $ref: '#/components/parameters/UserId'
     get:
       operationId: listCurrencies
       summary: List supported currencies
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20, maximum: 100 }
+          description: max items to return
+        - name: offset
+          in: query
+          schema: { type: integer, default: 0 }
+          description: items to skip
+        - name: search
+          in: query
+          schema: { type: string }
+          description: filter by currency code or name
       responses:
         '200':
           description: Paginated list of supported currencies
@@ -27,28 +38,9 @@ paths:
                   data:
                     type: array
                     items: { $ref: '#/components/schemas/Currency' }
-        '401':
-          description: Missing or invalid token
-          content:
-            application/json:
-              schema: { $ref: '#/components/schemas/Error' }
-      parameters:
-        - name: limit
-          in: query
-          schema: { type: integer, default: 20, maximum: 100 }
-          description: max items to return
-        - name: offset
-          in: query
-          schema: { type: integer, default: 0 }
-          description: items to skip
-        - name: search
-          in: query
-          schema: { type: string }
-          description: filter by currency code or name
   /currencies/{code}/rate:
     parameters:
       - $ref: '#/components/parameters/CurrencyCode'
-      - $ref: '#/components/parameters/UserId'
     get:
       operationId: getCurrencyRate
       summary: Get the current USD exchange rate for a currency
@@ -63,11 +55,6 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
-        '401':
-          description: Missing or invalid token
-          content:
-            application/json:
-              schema: { $ref: '#/components/schemas/Error' }
         '404':
           description: Currency not found
           content:
@@ -75,12 +62,6 @@ paths:
               schema: { $ref: '#/components/schemas/Error' }
 components:
   parameters:
-    UserId:
-      name: X-User-Id
-      in: header
-      required: true
-      description: caller identity injected by the gateway from the validated token
-      schema: { type: string }
     CurrencyCode:
       name: code
       in: path
@@ -109,7 +90,3 @@ components:
         message: { type: string, description: short human-readable label }
         description: { type: string, description: detailed explanation }
         moreInfo: { type: string, description: URI to documentation }
-  securitySchemes:
-    bearerAuth: { type: http, scheme: bearer, bearerFormat: JWT }
-security:
-  - bearerAuth: []

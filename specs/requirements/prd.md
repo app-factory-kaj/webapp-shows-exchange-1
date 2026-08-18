@@ -10,18 +10,18 @@ A focused single-page webapp where a signed-in user selects a currency and immed
 
 ## Actors
 
-- **User** — a signed-in visitor who selects a currency and views its current exchange rate to USD.
+- **User** — any visitor who selects a currency and views its current exchange rate to USD. No account or sign-in is required.
 
 ## User Stories
 
-1. As a User, I want to sign in to the app, so that my access is secured via the platform's single sign-on.
+1. As a User, I want to open the app without creating an account or signing in, so that I can quickly check a rate with no friction.
 2. As a User, I want to search for or select a currency from a list of supported currencies, so that I can find the one I care about.
 3. As a User, I want to see the current exchange rate of my selected currency to USD, so that I know what it's worth right now.
 4. As a User, I want to see when the displayed rate was last updated, so that I know how current the information is.
 
 ## Product Decisions
 
-- Sign-in is via SSO through Thunder, the platform IDP (org default).
+- The app is publicly accessible with no sign-in or account required — overriding the organization's default of signing every web app's users in via SSO.
 - The core experience is a single-currency lookup, not a multi-currency dashboard — the user picks one currency at a time and sees its rate to USD.
 - Only the current rate is shown; no historical trend or charting is in scope for this phase.
 - The app is stateless with respect to user preferences — no favorites or saved/pinned currencies.
@@ -30,7 +30,7 @@ A focused single-page webapp where a signed-in user selects a currency and immed
 
 ## Phasing
 
-- **Phase 1 — Deliver a single-currency, daily-refreshed exchange rate lookup tool**: sign-in, currency selection, and current-rate display, all in one narrow flow. Stories: 1, 2, 3, 4.
+- **Phase 1 — Deliver a single-currency, daily-refreshed exchange rate lookup tool**: no-signin access, currency selection, and current-rate display, all in one narrow flow. Stories: 1, 2, 3, 4.
 
 ## Out of Scope
 

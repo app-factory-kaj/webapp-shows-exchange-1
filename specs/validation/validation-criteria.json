@@ -2,12 +2,11 @@
   "requirements": [
     {
       "id": "REQ-001",
-      "statement": "Users can sign in to the app via the platform's single sign-on",
+      "statement": "Users can open and use the app without creating an account or signing in",
       "stories": [1],
       "criteria": [
-        { "id": "AC-001-a", "must": "An unauthenticated user is presented with a sign-in flow before accessing the app", "method": "e2e" },
-        { "id": "AC-001-b", "must": "A user who completes sign-in successfully reaches the app's main screen", "method": "e2e" },
-        { "id": "AC-001-c", "must": "A user who is not signed in cannot view currency or rate data", "method": "e2e" }
+        { "id": "AC-001-a", "must": "A visitor reaches the app's main screen with no sign-in or account creation step", "method": "e2e" },
+        { "id": "AC-001-b", "must": "No login form, sign-in redirect, or auth prompt is presented anywhere in the flow", "method": "e2e" }
       ]
     },
     {
