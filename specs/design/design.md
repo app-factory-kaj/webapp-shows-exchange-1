@@ -2,7 +2,7 @@
 
 ## Overview
 
-A single-page webapp lets a signed-in user pick a currency and see its current exchange rate to USD, refreshed daily. `exchange-webapp` (React SPA) handles sign-in via Thunder and the currency-lookup UI; it calls `exchange-api` (Ballerina service), which resolves currencies and their daily USD rates from an external exchange-rate data provider and returns them to the webapp. The service layer keeps the external provider's details off the browser and gives the platform one place to cache/normalize daily rates.
+A single-page webapp lets a signed-in user pick a currency and see its current exchange rate to USD, refreshed daily. `exchange-webapp` (React SPA) handles sign-in via Thunder and the currency-lookup UI; it calls `exchange-api` (Ballerina service), which resolves currencies and their daily USD rates from ExchangeRate-API (v6.exchangerate-api.com) and returns them to the webapp. The service layer keeps the external provider's API key off the browser and gives the platform one place to cache/normalize daily rates.
 
 ## Context (C1)
 
@@ -12,7 +12,7 @@ graph TD
     Webapp[Exchange Rate Webapp]
     API[Exchange Rate API]
     Thunder[Thunder Auth]
-    Provider[Exchange Rate Data Provider]
+    Provider[ExchangeRate-API]
 
     User -->|signs in, looks up a currency| Webapp
     Webapp -->|REST calls| API
