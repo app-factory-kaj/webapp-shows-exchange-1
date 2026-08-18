@@ -1,0 +1,16 @@
+{
+  "name": "exchange-api",
+  "type": "service",
+  "version": "0.1.0",
+  "language": "Ballerina",
+  "buildpack": "docker",
+  "appPath": "exchange-api",
+  "entrypoint": "deployment/service",
+  "exposure": "intranet",
+  "dependencies": [
+    { "kind": "platform-resource", "name": "thunder-app", "resourceType": "thunder-app", "parameters": { "scopes": "openid profile email" }, "description": "Validates the bearer token on incoming requests (via the gateway) to identify the signed-in caller." },
+    { "kind": "external", "name": "exchange-rate-provider", "style": "rest-api", "description": "Frankfurter (api.frankfurter.dev) — free, keyless, daily-refreshed exchange rate data covering 200+ currencies, used to fetch each currency's current rate against USD. No API key or config needed; requires a specPath before the build gate resolves it." }
+  ],
+  "description": "Ballerina REST service that lists supported currencies and returns the current exchange rate of a given currency to USD, sourced daily from an external exchange-rate provider. Sits behind the gateway (bearer-token protected) and is called only by exchange-webapp. Does not perform arbitrary amount conversion, history, or store per-user data.",
+  "skillsPinned": ["openapi-conventions", "ballerina", "api-management", "thunder-authentication"]
+}

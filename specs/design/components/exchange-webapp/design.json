@@ -1,0 +1,16 @@
+{
+  "name": "exchange-webapp",
+  "type": "web-application",
+  "version": "0.1.0",
+  "language": "TypeScript",
+  "buildpack": "docker",
+  "appPath": "exchange-webapp",
+  "entrypoint": "deployment/web-application",
+  "exposure": "internet",
+  "dependencies": [
+    { "kind": "component", "name": "exchange-api", "description": "Calls the exchange rate API to list supported currencies and fetch the current USD rate for the selected one." },
+    { "kind": "platform-resource", "name": "thunder-app", "resourceType": "thunder-app", "parameters": { "scopes": "openid profile email" }, "description": "Signs the user in via OIDC + PKCE and provides the bearer token attached to calls to exchange-api." }
+  ],
+  "description": "React single-page app where a signed-in user searches/selects a currency and views its current exchange rate to USD along with a last-updated timestamp. Handles sign-in via Thunder and all UI state; holds no exchange-rate data itself and never talks to the external rate provider directly — it always goes through exchange-api.",
+  "skillsPinned": ["wireframes", "react-webapp", "thunder-authentication"]
+}

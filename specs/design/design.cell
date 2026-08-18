@@ -1,0 +1,16 @@
+title Exchange Rate Lookup
+
+phase 1
+
+component exchange-webapp as "Exchange Rate Webapp" web-application [stories: 1, 2, 3, 4]
+component exchange-api as "Exchange Rate API" service [stories: 2, 3, 4]
+
+east thunder-app as "Thunder Auth" identity-server
+south exchange-rate-provider as "Exchange Rate Data Provider" service
+
+north -> exchange-webapp
+
+exchange-webapp -> exchange-api
+exchange-webapp -> thunder-app
+exchange-api -> thunder-app
+exchange-api -> exchange-rate-provider

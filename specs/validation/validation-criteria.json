@@ -1,0 +1,42 @@
+{
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "statement": "Users can sign in to the app via the platform's single sign-on",
+      "stories": [1],
+      "criteria": [
+        { "id": "AC-001-a", "must": "An unauthenticated user is presented with a sign-in flow before accessing the app", "method": "e2e" },
+        { "id": "AC-001-b", "must": "A user who completes sign-in successfully reaches the app's main screen", "method": "e2e" },
+        { "id": "AC-001-c", "must": "A user who is not signed in cannot view currency or rate data", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-002",
+      "statement": "Users can search for or select a currency from a list of supported currencies",
+      "stories": [2],
+      "criteria": [
+        { "id": "AC-002-a", "must": "The app displays a list of supported currencies", "method": "e2e" },
+        { "id": "AC-002-b", "must": "The user can search/filter the currency list", "method": "e2e" },
+        { "id": "AC-002-c", "must": "The user can select a currency from the list", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-003",
+      "statement": "Users can see the current exchange rate of the selected currency to USD",
+      "stories": [3],
+      "criteria": [
+        { "id": "AC-003-a", "must": "Selecting a currency displays its current exchange rate to USD", "method": "e2e" },
+        { "id": "AC-003-b", "must": "The displayed rate corresponds to the currency the user selected", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-004",
+      "statement": "Users can see when the displayed rate was last updated",
+      "stories": [4],
+      "criteria": [
+        { "id": "AC-004-a", "must": "The rate view shows a last-updated date/timestamp", "method": "e2e" },
+        { "id": "AC-004-b", "must": "The last-updated indicator reflects the actual date the rate was refreshed (i.e. daily, not stale beyond one day)", "method": "manual" }
+      ]
+    }
+  ]
+}
