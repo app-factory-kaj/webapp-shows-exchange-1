@@ -1,0 +1,57 @@
+openapi: 3.0.3
+info:
+  title: ExchangeRate-API v6 (subset)
+  version: "6"
+  description: >
+    Subset of the ExchangeRate-API v6 contract actually used by exchange-api:
+    the Latest Exchange Rates endpoint, base currency USD. Docs:
+    https://www.exchangerate-api.com/docs/standard-requests
+servers:
+  - url: https://v6.exchangerate-api.com/v6
+paths:
+  /{apiKey}/latest/{baseCode}:
+    get:
+      operationId: getLatestRates
+      summary: Get the latest exchange rates for a base currency
+      parameters:
+        - name: apiKey
+          in: path
+          required: true
+          description: ExchangeRate-API account API key
+          schema: { type: string }
+        - name: baseCode
+          in: path
+          required: true
+          description: ISO 4217 base currency code (this service always requests USD)
+          schema: { type: string, example: USD }
+      responses:
+        '200':
+          description: Latest conversion rates from the base currency to every supported currency
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LatestRatesResponse' }
+        '400':
+          description: Malformed request or invalid API key
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorResponse' }
+components:
+  schemas:
+    LatestRatesResponse:
+      type: object
+      required: [result, base_code, conversion_rates]
+      properties:
+        result: { type: string, description: "success or error" }
+        time_last_update_utc: { type: string, description: when these rates were last refreshed }
+        time_next_update_utc: { type: string, description: when the next refresh is expected }
+        base_code: { type: string, description: the requested base currency code }
+        conversion_rates:
+          type: object
+          description: map of currency code to its rate against the base currency
+          additionalProperties: { type: number }
+    ErrorResponse:
+      type: object
+      required: [result, error-type]
+      properties:
+        result: { type: string, description: "always \"error\"" }
+        error-type: { type: string, description: reason the request failed, e.g. invalid-key }
