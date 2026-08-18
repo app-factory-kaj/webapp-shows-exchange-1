@@ -7,9 +7,26 @@
   "appPath": "exchange-webapp",
   "entrypoint": "deployment/web-application",
   "exposure": "internet",
-  "dependencies": [
-    { "kind": "component", "name": "exchange-api", "description": "Calls the exchange rate API to list supported currencies and fetch the current USD rate for the selected one." }
-  ],
   "description": "React single-page app where any visitor searches/selects a currency and views its current exchange rate to USD along with a last-updated timestamp. No sign-in is required. Holds no exchange-rate data itself and never talks to the external rate provider directly — it always goes through exchange-api.",
-  "skillsPinned": ["wireframes", "react-webapp"]
+  "dependencies": [
+    {
+      "kind": "component",
+      "name": "exchange-api",
+      "description": "Calls the exchange rate API to list supported currencies and fetch the current USD rate for the selected one.",
+      "wiring": {
+        "endpoint": {
+          "component": "webapp-shows-exchange-1-exchange-api",
+          "name": "http",
+          "visibility": "project",
+          "envBindings": {
+            "address": "EXCHANGE_API_URL"
+          }
+        }
+      }
+    }
+  ],
+  "skillsPinned": [
+    "wireframes",
+    "react-webapp"
+  ]
 }
