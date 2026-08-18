@@ -7,6 +7,7 @@
   "appPath": "exchange-api",
   "entrypoint": "deployment/service",
   "exposure": "intranet",
+  "stories": [2, 3, 4],
   "description": "Ballerina REST service that lists supported currencies and returns the current exchange rate of a given currency to USD, sourced daily from an external exchange-rate provider. Called only by exchange-webapp; publicly reachable with no sign-in required. Does not perform arbitrary amount conversion, history, or store per-user data.",
   "dependencies": [
     {
