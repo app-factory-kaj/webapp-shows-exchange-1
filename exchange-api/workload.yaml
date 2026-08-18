@@ -1,0 +1,17 @@
+apiVersion: openchoreo.dev/v1alpha1
+metadata:
+  name: exchange-api
+
+endpoints:
+  - name: http
+    type: HTTP
+    port: 9090
+    basePath: /
+    visibility:
+      - external
+
+dependencies:
+  resources:
+    - ref: webapp-shows-exch-26ea6788
+      envBindings:
+        EXCHANGE_RATE_API_KEY: EXCHANGE_RATE_API_KEY
