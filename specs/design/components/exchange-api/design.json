@@ -21,13 +21,7 @@
           "secret": true,
           "description": "API key for ExchangeRate-API, obtained from your account dashboard at https://app.exchangerate-api.com, used to authenticate the /v6/{API_KEY}/latest/USD request."
         }
-      ],
-      "wiring": {
-        "ref": "webapp-shows-exch-26ea6788",
-        "envBindings": {
-          "EXCHANGE_RATE_API_KEY": "EXCHANGE_RATE_API_KEY"
-        }
-      }
+      ]
     }
   ],
   "skillsPinned": [
