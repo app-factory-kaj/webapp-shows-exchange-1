@@ -12,15 +12,12 @@
     {
       "kind": "external",
       "name": "exchange-rate-provider",
-      "description": "ExchangeRate-API (account/dashboard at https://app.exchangerate-api.com, API at https://v6.exchangerate-api.com) — fetches daily USD-based exchange rates via GET /v6/{API_KEY}/latest/USD; the service picks the requested currency's rate out of the returned conversion_rates map. Requires an API key.",
-      "style": "rest-api",
-      "specPath": "specs/design/components/exchange-api/dependencies/exchange-rate-provider.openapi.yaml",
-      "config": [
-        {
-          "key": "EXCHANGE_RATE_API_KEY",
-          "secret": true,
-          "description": "API key for ExchangeRate-API, obtained from your account dashboard at https://app.exchangerate-api.com, used to authenticate the /v6/{API_KEY}/latest/USD request."
-        }
+      "description": "Daily USD-based currency exchange rate data, used by the service to look up the requested currency's rate against USD. Not yet pinned to a specific provider — see candidates.",
+      "candidates": [
+        { "name": "exchangerate-api", "style": "rest-api", "description": "ExchangeRate-API (v6.exchangerate-api.com) — the previously-pinned choice; simple key-in-URL REST API, generous free tier, daily updates on the free plan." },
+        { "name": "frankfurter", "style": "rest-api", "description": "Frankfurter (api.frankfurter.dev) — free and keyless, sourced from European Central Bank daily reference rates, open source; no API key config needed at all." },
+        { "name": "fixer", "style": "rest-api", "description": "Fixer.io — well-established forex data API with historical and time-series endpoints beyond just latest rates, API-key authenticated." },
+        { "name": "currencyfreaks", "style": "rest-api", "description": "CurrencyFreaks — permanently free plan (1,000 calls/month) covering 1,025 currencies, API-key authenticated, JSON/XML output." }
       ]
     }
   ],
